@@ -1,0 +1,40 @@
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+logging:
+  level:
+    io:
+      seata: info
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: io.seata.sample.order.entity
+server:
+  port: 8181
+spring:
+  application:
+    name: order-tcc-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/seata
+    username: root
+seata:
+  service:
+    disable-global-transaction: false
+    vgroup-mapping:
+      my_test_tx_group: default
+    grouplist:
+      default: 192.168.148.147:8091
+  tx-service-group: my_test_tx_group

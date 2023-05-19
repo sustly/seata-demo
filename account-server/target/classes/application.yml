@@ -1,0 +1,38 @@
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+logging:
+  level:
+    io:
+      seata: info
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: io.seata.sample.account.entity
+server:
+  port: 8181
+spring:
+  application:
+    name: account-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/seata
+    username: root
+seata:
+  service:
+    disable-global-transaction: false
+    vgroup-mapping:
+      my_test_tx_group: default
+    grouplist:
+      default: 192.168.148.147:8091
+  tx-service-group: my_test_tx_group
